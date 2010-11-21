@@ -1,12 +1,12 @@
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
-    gemspec.name = "bigamy"
+    gemspec.name = "mm-active_record_associations"
     gemspec.summary = "Have associations between ActiveRecord objects and MongoMapper documents"
     gemspec.description = ""
-    gemspec.email = "ryan@angilly.com"
-    gemspec.homepage = "http://github.com/ryana/bigamy"
-    gemspec.authors = ["Ryan Angilly"]
+    gemspec.email = "ryan@ryanneufeld.ca"
+    gemspec.homepage = 'https://github.com/rkneufeld/mm-active_record_associations'
+    gemspec.authors = ["Ryan Angilly", "Ryan Neufeld"]
 
     gemspec.add_development_dependency 'shoulda', '2.11.0'
     gemspec.add_development_dependency 'mocha', '0.9.8'
