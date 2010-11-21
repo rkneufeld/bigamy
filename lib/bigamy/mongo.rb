@@ -16,7 +16,7 @@ module Bigamy
   class MongoHasAndBelongsToMany < HasAndBelongsToMany
     def initialize parent, name, options
       super
-      me.key as, (options[:unique] ? Set : Array), :default => []
+      me.key as, (options[:unique] ? Set : Array), :default => [], :index => true
     end
 
     def add_getter
