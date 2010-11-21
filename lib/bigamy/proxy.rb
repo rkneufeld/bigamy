@@ -40,7 +40,7 @@ module Bigamy
         def #{foreign_key}
           import_id_val read_val(:#{foreign_key})
         end
-        EOF
+      EOF
     end
 
     def divorce_everyone
@@ -107,7 +107,7 @@ module Bigamy
       options[:foreign_key] || :"#{root_klass_name}_id"
     end
 
-    def add_getter 
+    def add_getter
       me.class_eval <<-EOF
         def #{name}
           self.#{primary_key}.nil? ? nil : #{target_klass}.all(:conditions => {:#{foreign_key} => export_id_val(self.#{primary_key})})
@@ -126,7 +126,7 @@ module Bigamy
             raise NewRecordAssignment.new('Parent must be saved') if self.new_record?
             new_id = export_id_val(self.#{primary_key})
           end
-          
+
           #{name}.each {|x| x.update_attributes :#{foreign_key} => nil }
 
           val.each {|v| v.send "#{foreign_key}=", new_id; v.save! }
@@ -161,7 +161,7 @@ module Bigamy
             set_value(:#{foreign_key}, nil)
             return
           end
-          
+
           raise NewRecordAssignment if val.new_record?
           raise TypeError.new("Should get #{klass}") unless val.is_a? #{klass}
 
@@ -172,4 +172,17 @@ module Bigamy
       me.class_eval code, __FILE__, __LINE__ 
     end
   end
+
+  class HasAndBelongsToMany < Proxy
+    def initialize parent, name, options
+      super
+    end
+
+    def as
+      target_klass.to_s.underscore + '_ids'
+    end
+
+    def serialize_foreign_key; end # Don't do this part
+  end
+
 end

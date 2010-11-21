@@ -55,6 +55,10 @@ module Bigamy
       def has_many_ar name, options = {}
         bigamy_associations[name] = MongoHasMany.new(self, name, options)
       end
+
+      def has_and_belongs_to_many_ar name, options = {}
+        bigamy_associations[name] = MongoHasAndBelongsToMany.new(self, name, options)
+      end
     end
 
     module InstanceMethods
@@ -107,6 +111,10 @@ module Bigamy
       def has_many_mm name, options = {}
         bigamy_associations[name] = ARHasMany.new(self, name, options)
       end
+
+      def has_and_belongs_to_many_mm name, options = {}
+        bigamy_associations[name] = ARHasAndBelongsToMany.new(self,name,options)
+      end
     end
 
     module InstanceMethods
@@ -135,4 +143,5 @@ module Bigamy
 end
 
 MongoMapper::Document.append_inclusions(Bigamy::Mongo::PluginAddition)
+MongoMapper::EmbeddedDocument.append_inclusions(Bigamy::Mongo::PluginAddition)
 Bigamy::ActiveRecord.configure(ActiveRecord::Base)
