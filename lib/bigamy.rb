@@ -131,7 +131,7 @@ module Bigamy
       end
 
       def import_id_val i
-        BSON::ObjectID.from_string(i)
+        BSON::ObjectId.from_string(i)
       end
 
       def reset_current_relationships f_key, f_id
